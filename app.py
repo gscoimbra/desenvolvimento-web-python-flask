@@ -23,8 +23,12 @@ def index():
 @app.route("/cadastrar", methods=["GET", "POST"])
 def cadastrar():
     if request.method == "POST":
-        nome = request.form["nome"]
-        email = request.form["email"]
+        nome = request.form["nome"].strip()
+        email = request.form["email"].strip()
+
+        if not nome or not email:
+            return "Erro: Nome e Email são obrigatórios."
+
         cursor.execute("INSERT INTO usuarios (nome, email) VALUES (%s, %s)", (nome, email))
         db.commit()
         return redirect(url_for("index"))
@@ -39,8 +43,12 @@ def deletar(id):
 @app.route("/editar/<int:id>", methods=["GET", "POST"])
 def editar(id):
     if request.method == "POST":
-        nome = request.form["nome"]
-        email = request.form["email"]
+        nome = request.form["nome"].strip()
+        email = request.form["email"].strip()
+
+        if not nome or not email:
+            return "Erro: Nome e Email são obrigatórios."
+
         cursor.execute("UPDATE usuarios SET nome = %s, email = %s WHERE id = %s", (nome, email, id))
         db.commit()
         return redirect(url_for("index"))
