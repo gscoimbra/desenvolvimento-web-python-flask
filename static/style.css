@@ -1,0 +1,162 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Corpo padrão sem tema (usado como base) */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Tema claro */
+body.light-mode {
+  background-color: #f0f0f0;
+  color: #000;
+}
+
+/* Tema escuro */
+body.dark-mode {
+  background-color: #121212;
+  color: #f5f5f5;
+}
+
+/* Navegação */
+nav {
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+body.light-mode nav {
+  background-color: #e0e0e0;
+}
+body.dark-mode nav {
+  background-color: #1f1f1f;
+}
+
+/* Links de navegação */
+nav a {
+  text-decoration: none;
+  margin-right: 20px;
+  font-weight: bold;
+}
+body.light-mode nav a {
+  color: #1a237e;
+}
+body.dark-mode nav a {
+  color: #90caf9;
+}
+
+/* Títulos */
+h2 {
+  margin-bottom: 15px;
+  font-size: 24px;
+  border-bottom: 2px solid;
+  padding-bottom: 5px;
+}
+body.light-mode h2 {
+  color: #6200ee;
+  border-bottom-color: #6200ee;
+}
+body.dark-mode h2 {
+  color: #bb86fc;
+  border-bottom-color: #bb86fc;
+}
+
+/* Listas */
+ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+li {
+  margin-bottom: 10px;
+}
+
+/* Links de ação */
+a[href*="editar"],
+a[href*="deletar"] {
+  margin-left: 10px;
+  font-size: 14px;
+  padding: 4px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+a[href*="editar"] {
+  background-color: #ffd54f;
+  color: #000;
+}
+
+a[href*="deletar"] {
+  background-color: #ef5350;
+  color: #fff;
+}
+
+a[href*="editar"]:hover,
+a[href*="deletar"]:hover {
+  opacity: 0.85;
+}
+
+/* Formulário */
+form {
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 500px;
+}
+body.light-mode form {
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+body.dark-mode form {
+  background-color: #1e1e1e;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+form label {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+body.light-mode form label {
+  color: #000;
+}
+body.dark-mode form label {
+  color: #e0e0e0;
+}
+
+form input[type="text"],
+form input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+}
+body.light-mode form input[type="text"],
+body.light-mode form input[type="email"] {
+  background-color: #fff;
+  border: 1px solid #aaa;
+  color: #000;
+}
+body.dark-mode form input[type="text"],
+body.dark-mode form input[type="email"] {
+  background-color: #2b2b2b;
+  border: 1px solid #555;
+  color: #fff;
+}
+
+form input[type="submit"] {
+  margin-top: 15px;
+  background-color: #03dac6;
+  color: #000;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+form input[type="submit"]:hover {
+  background-color: #00bfa5;
+}

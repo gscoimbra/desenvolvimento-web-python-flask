@@ -3,14 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <title>{% block title %}Sistema{% endblock %}</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v={{ config['VERSION'] }}">
 </head>
 <body>
+  <!-- Botão flutuante para alternar o tema -->
+  <button id="toggle-theme" style="
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 999;
+    border: none;
+  ">🌗</button>
+
   <nav>
     <a href="{{ url_for('index') }}">Início</a> |
     <a href="{{ url_for('cadastrar') }}">Cadastrar Usuário</a>
   </nav>
   <hr>
+
   {% block content %}{% endblock %}
+
+  <script>
+    const body = document.body;
+    const toggleBtn = document.getElementById('toggle-theme');
+
+    function applyTheme(theme) {
+      body.classList.remove('light-mode', 'dark-mode');
+      body.classList.add(`${theme}-mode`);
+    }
+
+    // Aplica o tema salvo ou padrão
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    applyTheme(savedTheme);
+
+    toggleBtn.addEventListener('click', () => {
+      const currentTheme = body.classList.contains('dark-mode') ? 'dark' : 'light';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      applyTheme(newTheme);
+      localStorage.setItem('theme', newTheme);
+    });
+  </script>
 </body>
 </html>
