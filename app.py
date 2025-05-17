@@ -1,3 +1,5 @@
+import sqlite3
+
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 
 import psycopg2
@@ -7,15 +9,18 @@ app = Flask(__name__)
 app.config['VERSION'] = '1.0.0'
 
 # Conexão com o PostgreSQL
+IS_TESTING = app.config.get("TESTING", False)
+
 db = psycopg2.connect(
     host="localhost",
-    dbname="api2-python",
+    dbname="api2-python-test" if IS_TESTING else "api2-python",
     user="postgres",
     password="root"
 )
 
-cursor = db.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
+cursor = db.cursor(cursor_factory=psycopg2.extras.DictCursor)
+DB_PATH = 'test_usuarios.db' if app.config.get('TESTING') else 'usuarios.db'
 @app.route("/")
 def index():
     cursor.execute("SELECT * FROM usuarios")
@@ -134,6 +139,10 @@ def api_deletar_usuario(id):
 def add_header(response):
     response.headers['Cache-Control'] = 'no-store'
     return response
+
+def get_db_connection():
+    conn = sqlite3.connect(DB_PATH)
+    return conn
 
 if __name__ == "__main__":
     app.run(debug=True)
