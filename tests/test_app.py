@@ -65,6 +65,26 @@ class FlaskTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Editado', response.data)
 
+    def test_deletar_route(self):
+        # Cadastra um usuário para deletar
+        self.client.post('/cadastrar', data=dict(nome='Deletar', email='deletar@email.com'), follow_redirects=True)
+
+        # Busca o ID do usuário
+        self.cursor.execute("SELECT id FROM usuarios WHERE nome = %s", ('Deletar',))
+        result = self.cursor.fetchone()
+        self.assertIsNotNone(result)
+        user_id = result[0]
+
+        # Faz requisição POST para deletar o usuário
+        response = self.client.post(f'/deletar/{user_id}', follow_redirects=True)
+        self.assertEqual(response.status_code, 200)
+
+        # Verifica se o usuário foi removido do banco
+        self.cursor.execute("SELECT * FROM usuarios WHERE id = %s", (user_id,))
+        result = self.cursor.fetchone()
+        self.assertIsNone(result)  # Espera None se foi deletado corretamente
+
+
 
 if __name__ == '__main__':
     unittest.main()

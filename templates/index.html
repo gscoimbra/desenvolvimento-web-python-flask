@@ -6,7 +6,9 @@
   {% for u in usuarios %}
     <li>{{ u.nome }} - {{ u.email }}
       <a href="{{ url_for('editar', id=u.id) }}">Editar</a>
-      <a href="{{ url_for('deletar', id=u.id) }}" onclick="return confirm('Tem certeza que deseja excluir?')">Remover</a>
+      <form action="{{ url_for('deletar_usuario', id=u.id) }}" method="post" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja excluir?')">
+        <button type="submit">Remover</button>
+      </form>
     </li>
   {% else %}
     <li>Nenhum usuário cadastrado.</li>
