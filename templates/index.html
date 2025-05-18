@@ -2,16 +2,23 @@
 {% block title %}Lista de Usuários{% endblock %}
 {% block content %}
 <h2>Usuários Cadastrados</h2>
-<ul>
+<div class="user-list">
   {% for u in usuarios %}
-    <li>{{ u.nome }} - {{ u.email }}
-      <a href="{{ url_for('editar', id=u.id) }}">Editar</a>
-      <form action="{{ url_for('deletar_usuario', id=u.id) }}" method="post" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja excluir?')">
-        <button type="submit">Remover</button>
-      </form>
-    </li>
+    <div class="user-card">
+      <div class="user-info">
+        <strong>{{ u.nome }}</strong><br>
+        <small>{{ u.email }}</small>
+      </div>
+      <div class="user-actions">
+        <a href="{{ url_for('editar', id=u.id) }}">Editar</a>
+        <form action="{{ url_for('deletar_usuario', id=u.id) }}" method="post" onsubmit="return confirm('Tem certeza que deseja excluir?')">
+          <button type="submit">Remover</button>
+        </form>
+      </div>
+    </div>
   {% else %}
-    <li>Nenhum usuário cadastrado.</li>
+    <div class="no-users">Nenhum usuário cadastrado.</div>
   {% endfor %}
-</ul>
+</div>
+
 {% endblock %}
