@@ -1,24 +1,18 @@
 {% extends "base.html" %}
-{% block title %}Lista de Usuários{% endblock %}
+{% block title %}Ideias cadastradas{% endblock %}
 {% block content %}
-<h2>Usuários Cadastrados</h2>
-<div class="user-list">
+<h2>Ideias cadastradas</h2>
+<ul>
   {% for u in usuarios %}
-    <div class="user-card">
-      <div class="user-info">
-        <strong>{{ u.nome }}</strong><br>
-        <small>{{ u.email }}</small>
-      </div>
-      <div class="user-actions">
-        <a href="{{ url_for('editar', id=u.id) }}">Editar</a>
-        <form action="{{ url_for('deletar_usuario', id=u.id) }}" method="post" onsubmit="return confirm('Tem certeza que deseja excluir?')">
-          <button type="submit">Remover</button>
-        </form>
-      </div>
-    </div>
+    <li>
+      <strong>{{ u.nome }}</strong> — proposta por {{ u.email }}
+      <a href="{{ url_for('editar', id=u.id) }}">Revisar</a>
+      <form action="{{ url_for('deletar_usuario', id=u.id) }}" method="post" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja excluir esta ideia?')">
+        <button type="submit">Excluir</button>
+      </form>
+    </li>
   {% else %}
-    <div class="no-users">Nenhum usuário cadastrado.</div>
+    <li>Nenhuma ideia cadastrada até o momento.</li>
   {% endfor %}
-</div>
-
+</ul>
 {% endblock %}

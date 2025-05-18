@@ -40,7 +40,7 @@ body.dark-mode nav {
 /* Links de navegação */
 nav a {
   text-decoration: none;
-  margin-right: 20px;
+  margin-right: 0px;
   font-weight: bold;
 }
 body.light-mode nav a {
@@ -242,4 +242,7 @@ body.dark-mode .user-card {
 .user-actions a:hover,
 .user-actions form button:hover {
   opacity: 0.85;
+}
+.separator {
+  margin: 10px;
 }

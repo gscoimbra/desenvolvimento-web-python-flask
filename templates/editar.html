@@ -3,14 +3,14 @@
 {% block title %}Editar Usuário{% endblock %}
 
 {% block content %}
-  <h2>Editar Usuário</h2>
+  <h2>Editar ideia</h2>
   <form action="{{ url_for('editar', id=usuario['id']) }}" method="POST">
-    <label for="nome">Nome:</label>
+    <label for="nome">Título da ideia:</label>
     <input type="text" id="nome" name="nome" value="{{ usuario['nome'] }}" required><br>
 
-    <label for="email">Email:</label>
+    <label for="email">Responsável:</label>
     <input type="email" id="email" name="email" value="{{ usuario['email'] }}" required><br>
 
-    <button type="submit">Salvar Alterações</button>
+    <button type="submit">Salvar alterações</button>
   </form>
 {% endblock %}
